@@ -48,14 +48,14 @@ spring:
 
 monitor-es:
   elastics[0]:
-    url: http://10.1.1.37:9200/_cluster/health
-    notify: cai_yingying@dahuatech.com
+    url:
+    notify:
     environment: dts-test
   elastics[1]:
-    url: http://10.1.1.38:9200/_cluster/health
-    notify: cai_yingying@dahuatech.com
+    url:
+    notify:
     environment: dts-test
   elastics[2]:
-    url: http://10.1.1.44:9200/_cluster/health
-    notify: cai_yingying@dahuatech.com
+    url:
+    notify:
     environment: dts-test
