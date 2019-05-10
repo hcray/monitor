@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>登录</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<link type="text/css" th:href="@{/static/css/login.css}" rel="stylesheet"/>
+	<link type="text/css" th:href="@{/static/css/icheck/all.css}" rel="stylesheet"/>
+	<script type="text/javascript" th:src="@{/static/js/jquery-1.12.4.min.js}"></script>
+	<script type="text/javascript" th:src="@{/static/js/icheck.js}"></script>
+	<script type="text/javascript">
+		function clearInput() {
+			$("input[name='loginId']").val('');
+			$("input[name='userPassword']").val('');
+		}
+		$(document).ready(function () {
+			$('#btnSubmit').on({
+				click: function () {
+					var checked = $('#flat-checkbox-2').is(':checked');
+					$("input[name='rememberMe']").val(checked);
+					$("#loginForm").submit();
+				}
+			});
+			$('.list input').iCheck({
+				checkboxClass: 'icheckbox_flat-red', radioClass: 'iradio_flat-red'
+			});
+			//登录框获得焦点
+			$("input[name='loginId']").focus();
+		});
+	</script>
+</head>
+<body>
+<div class="bk">
+	<img src="#" th:src="@{/static/images/login.png}" width="100%"/>
+</div>
+<div class="copy" style="font-size: 12px; font-family: Microsoft YaHei, serif;">
+	Copyright © 2018 Corporation, All Rights Reserved.
+</div>
+<div class="logo">
+	<span class="Zh">大华字符管理系统</span>
+	<span class="En">SRMS</span>
+</div>
+<form th:action="@{/login/doLogin}" method="post" id="loginForm">
+	<div class="logo_form">
+		<div class="form_list">
+			<i class="user"></i>
+			<input type="text" name="loginId" placeholder=""/>
+		</div>
+		<div class="form_list">
+			<i class="key"></i>
+			<input type="password" name="userPassword" placeholder=""/>
+		</div>
+		<ul class="list">
+			<li>
+				<input tabindex="14" type="checkbox" id="flat-checkbox-2" checked="checked"/>
+				<input type="hidden" name="rememberMe" value="true"/>
+				<label for="flat-checkbox-2">记住我</label>
+			</li>
+		</ul>
+		<button class="btn_login" id="btnSubmit">登 录</button>
+		<div class="status"><p th:text="${status}">Welcome Message</p></div>
+	</div>
+</form>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<body>
+<div class="siderbar" th:fragment="sidebarDiv">
+	<div class="panel-group">
+		<div class="panel panel-default">
+			<div style="height: 70px;">&nbsp;</div>
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+						<span class="panel-icons worktop">&nbsp;</span>
+						<span class="panel-text">我的工作台</span>
+						<span class="panel-icons down">&nbsp;</span>
+					</a>
+				</h4>
+			</div>
+			<div id="collapseOne"
+					th:class="${oneMenu =='1'} ? 'panel-collapse collapse in' : 'panel-collapse collapse'">
+				<div class="panel-body">
+					<ul class="list-group">
+						<li th:class="${oneMenu =='1' and twoMenu =='1'} ? 'list-group-item active' : 'list-group-item'">
+							<a th:href="@{/myTask/list}">我的任务</a>
+						</li>
+						<li th:class="${oneMenu =='1' and twoMenu =='2'} ? 'list-group-item active' : 'list-group-item'">
+							<a th:href="@{/strQuery/list}">字符查询</a>
+						</li>
+						<li th:class="${oneMenu =='1' and twoMenu =='3'} ? 'list-group-item active' : 'list-group-item'">
+							<a th:href="@{/strSet/list}">字符维护</a>
+						</li>
+						<li th:class="${oneMenu =='1' and twoMenu =='4'} ? 'list-group-item active' : 'list-group-item'">
+							<a th:href="@{/strLabel/list}">字符标签</a>
+						</li>
+						<li th:class="${oneMenu =='1' and twoMenu =='6'} ? 'list-group-item active' : 'list-group-item'">
+							<a th:href="@{/modelManage/list}">模块管理</a>
+						</li>
+						<li th:class="${oneMenu =='1' and twoMenu =='7'} ? 'list-group-item active' : 'list-group-item'">
+							<a th:href="@{/labelManage/list}">标签管理</a>
+						</li>
+						<li th:class="${oneMenu =='1' and twoMenu =='8'} ? 'list-group-item active' : 'list-group-item'">
+							<a th:href="@{/termManage/list}">术语管理</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<shiro:hasAnyPermissions
+				name="user:nav,role:nav,auth:nav,userGroup:nav,list:nav,plineReviewer:nav,translate:nav,sessions:nav,loginHistory:nav">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<a data-toggle="collapse" data-parent="#accordion" class="active" href="#systemSetting">
+							<span class="panel-icons setting">&nbsp;</span>
+							<span class="panel-text">系统管理</span>
+							<span class="panel-icons down">&nbsp;</span>
+						</a>
+					</h4>
+				</div>
+				<div id="systemSetting"
+						th:class="${oneMenu =='2'} ? 'panel-collapse collapse in' : 'panel-collapse collapse'">
+					<div class="panel-body">
+						<ul class="list-group">
+							<shiro:hasPermission name="user:nav">
+								<li th:class="${oneMenu =='2' and twoMenu =='1'} ? 'list-group-item active' : 'list-group-item'">
+									<a th:href="@{/user/list}">用户管理</a>
+								</li>
+							</shiro:hasPermission>
+							<shiro:hasPermission name="role:nav">
+								<li th:class="${oneMenu =='2' and twoMenu =='2'} ? 'list-group-item active' : 'list-group-item'">
+									<a th:href="@{/role/list}">角色管理</a>
+								</li>
+							</shiro:hasPermission>
+							<shiro:hasPermission name="auth:nav">
+								<li th:class="${oneMenu =='2' and twoMenu =='3'} ? 'list-group-item active' : 'list-group-item'">
+									<a th:href="@{/authorities/list}">权限管理</a>
+								</li>
+							</shiro:hasPermission>
+							<shiro:hasPermission name="userGroup:nav">
+								<li th:class="${oneMenu =='2' and twoMenu =='4'} ? 'list-group-item active' : 'list-group-item'">
+									<a th:href="@{/userGroup/list}">用户组管理</a>
+								</li>
+							</shiro:hasPermission>
+							<shiro:hasPermission name="list:nav">
+								<li th:class="${oneMenu =='2' and twoMenu =='5'} ? 'list-group-item active' : 'list-group-item'">
+									<a th:href="@{/listName/list}">列表管理</a>
+								</li>
+							</shiro:hasPermission>
+							<shiro:hasPermission name="plineReviewer:nav">
+								<li th:class="${oneMenu =='2' and twoMenu =='8'} ? 'list-group-item active' : 'list-group-item'">
+									<a th:href="@{/plineReviewer/list}">产品线审核人配置</a>
+								</li>
+							</shiro:hasPermission>
+							<shiro:hasPermission name="translate:nav">
+								<li th:class="${oneMenu =='2' and twoMenu =='9'} ? 'list-group-item active' : 'list-group-item'">
+									<a th:href="@{/translate/list}">翻译人员配置</a>
+								</li>
+							</shiro:hasPermission>
+							<shiro:hasPermission name="sessions:nav">
+								<li th:class="${oneMenu =='2' and twoMenu =='6'} ? 'list-group-item active' : 'list-group-item'">
+									<a th:href="@{/sessions/list}">在线用户</a>
+								</li>
+							</shiro:hasPermission>
+							<shiro:hasPermission name="loginHistory:nav">
+								<li th:class="${oneMenu =='2' and twoMenu =='7'} ? 'list-group-item active' : 'list-group-item'">
+									<a th:href="@{/loginHistory/list}">登录记录</a>
+								</li>
+							</shiro:hasPermission>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</shiro:hasAnyPermissions>
+	</div>
+</div>
+</body>
+</html>

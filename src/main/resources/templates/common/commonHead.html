@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="commonHead(title)">
+    <title th:text="${title}"></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="shortcut icon" th:href="@{/static/favicon.ico}"/>
+    <!-- bootstrap 3.3.7 -->
+    <link rel="stylesheet" th:href="@{/static/bootstrap/3.3.7/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/static/bootstrap/3.3.7/css/jquery.treegrid.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/main.css}"/>
+    <!-- bootstrap.js必须放在jquery.js的后面 -->
+    <script type="text/javascript" th:src="@{/static/js/jquery-1.12.4.min.js}"></script>
+    <script type="text/javascript" th:src="@{/static/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/static/bootstrap/3.3.7/js/jquery.treegrid.js}"></script>
+    <script type="text/javascript" th:src="@{/static/bootstrap/3.3.7/js/jquery.treegrid.bootstrap3.js}"></script>
+    <script type="text/javascript" th:src="@{/static/js/colResizable-1.6.min.js}"></script>
+    <!-- 公共js -->
+    <script type="text/javascript" th:src="@{/static/js/common.js}"></script>
+    <style type="text/css">
+        .red {
+            background-color: red;
+            color: white;
+        }
+
+        .yellow {
+            background-color: yellow;
+            color: white;
+        }
+
+        .green {
+            background-color: green;
+            color: white;
+        }
+
+
+    </style>
+</head>
+</html>

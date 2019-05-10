@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div class="header" th:fragment="titleNavDiv">
+	<div class="login_info">
+		<span th:text="欢迎您"></span>
+		<!--
+		<a href="javascript:void(0);" onclick="versionHistory()">
+			<i class="glyphicon glyphicon-question-sign"></i>
+		</a>
+		-->
+		<a class="dropdown-toggle" onclick="javascript:$('.dropdown-menu').toggle()" data-toggle="dropdown">
+			<i class="glyphicon glyphicon-question-sign"></i>
+		</a>
+		<ul class="dropdown-menu" style="top: 50px; left: auto; right: 40px; min-width: 50px; width: auto;">
+		</ul>
+		<a href="javascript:void(0);" onclick="logout()">
+			<i class="glyphicon glyphicon-log-out"></i>
+		</a>
+	</div>
+	<div class="logo">
+		<label>大华字符管理系统</label>
+		<span style="white-space: nowrap;">String Resource Management System</span>
+	</div>
+</div>
+</body>
+</html>

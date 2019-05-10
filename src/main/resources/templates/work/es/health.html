@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head th:include="~{common/commonHead :: commonHead('ES健康情况')}">
+</head>
+<body>
+<div class="content">
+    <div class="main">
+        <div>
+            <div style="overflow-x:auto; padding: 0 5px;">
+                <table class="table table-bordered table-striped table-condensed table-hover"
+                       style="table-layout: fixed;">
+                    <thead>
+                    <tr>
+                        <th width="10%">name</th>
+                        <th width="10%">cluster_name</th>
+                        <th width="10%">status</th>
+                        <th width="10%">timed_out</th>
+                        <th width="10%">number_of_nodes</th>
+                        <th width="10%">number_of_data_nodes</th>
+                        <th width="10%">active_primary_shards</th>
+                        <th width="10%">active_shards</th>
+                        <th width="20%">url</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="entity : ${rows}">
+                        <td th:title="${entity.environment}" th:text="${entity.environment}"></td>
+                        <td th:title="${entity.cluster_name}" th:text="${entity.cluster_name}"></td>
+                        <td th:title="${entity.status}" th:text="${entity.status}" th:class="${entity.style}"></td>
+                        <td th:title="${entity.timed_out}" th:text="${entity.timed_out}"></td>
+                        <td th:title="${entity.number_of_nodes}" th:text="${entity.number_of_nodes}"></td>
+                        <td th:title="${entity.number_of_data_nodes}" th:text="${entity.number_of_data_nodes}"></td>
+                        <td th:title="${entity.active_primary_shards}" th:text="${entity.active_primary_shards}"></td>
+                        <td th:title="${entity.active_shards}" th:text="${entity.active_shards}"></td>
+                        <td th:title="${entity.url}" th:text="${entity.url}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

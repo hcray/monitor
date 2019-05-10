@@ -1,0 +1,61 @@
+server:
+  port: 8880
+
+jasypt:
+  encryptor:
+    password: MONPASSWORD
+
+spring:
+  mvc:
+    static-path-pattern: /static/**
+  thymeleaf:
+    encoding: UTF-8
+    cache: false
+    mode: HTML5
+    enabled: true
+    servlet:
+      content-type: text/html
+  resources:
+    chain:
+      strategy:
+        content:
+          enabled: true
+
+  mail:
+    host: mail.dahuatech.com
+    username:
+    password:
+    port: 25
+    protocol: smtp
+    test-connection: true
+    default-encoding: UTF-8
+    properties:
+      mail:
+        debug: true
+        smtp:
+          auth: true
+          connectiontimeout: 10000
+          timeout: 10000
+          writetimeout: 10000
+          #socketFactory:
+          #  class: javax.net.ssl.SSLSocketFactory
+          #  port: 25
+          starttls:
+            enable: true
+            required: true
+          ssl:
+            trust: mail.dahuatech.com
+
+monitor-es:
+  elastics[0]:
+    url: http://10.1.1.37:9200/_cluster/health
+    notify: cai_yingying@dahuatech.com
+    environment: dts-test
+  elastics[1]:
+    url: http://10.1.1.38:9200/_cluster/health
+    notify: cai_yingying@dahuatech.com
+    environment: dts-test
+  elastics[2]:
+    url: http://10.1.1.44:9200/_cluster/health
+    notify: cai_yingying@dahuatech.com
+    environment: dts-test

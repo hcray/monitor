@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="~{common/commonHead :: commonHead('术语管理')}"></head>
+<body>
+<div th:replace="~{common/titleNav :: titleNavDiv}"></div>
+<div class="content" th:with="oneMenu='1',twoMenu='8'">
+	<div th:replace="~{common/sidebarNav :: sidebarDiv}"></div>
+	<div class="main">
+		<div class="right">
+			<ol class="breadcrumb" style="margin-top:15px;">
+				<li>
+					<a th:href="@{/termManage/list}">术语管理</a>
+				</li>
+				<li class="active" th:text="(${entity.id}==null or ${entity.id}==0)?'新增术语':'编辑术语'"></li>
+			</ol>
+			<form id="editForm" th:action="@{/termManage/termSave}" method="post">
+				<input type="hidden" name="id" th:value="${entity.id}"/>
+				<table class="table table-form">
+					<thead>
+					<tr>
+						<td width="8%"></td>
+						<td width="22%"></td>
+						<td width="8%"></td>
+						<td width="22%"></td>
+						<td width="8%"></td>
+						<td width="22%"></td>
+					</tr>
+					</thead>
+					<tbody>
+					<tr>
+						<td align="right">
+							<span class="form-label">英文名称:</span>
+						</td>
+						<td>
+							<input type="text" class="form-control" name="nameEn" placeholder="请输入"
+									th:value="${entity.nameEn}"/>
+						</td>
+					</tr>
+					<tr>
+						<td align="right">
+							<span class="form-label">中文名称:</span>
+						</td>
+						<td>
+							<input type="text" class="form-control" name="nameCn" placeholder="请输入"
+									th:value="${entity.nameCn}"/>
+						</td>
+					</tr>
+					<tr>
+						<td align="right">
+							<span class="form-label">状态:</span>
+						</td>
+						<td>
+							<select class="form-control" name="status" title="请选择" th:value="${entity.status}">
+								<option value="">请选择</option>
+								<option th:each="opt:${statusList}" th:value="${opt.entryValue}"
+										th:text="${opt.entryValue}"
+										th:selected="${entity.status}==${opt.entryValue}"></option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td align="right">
+							<span class="form-label">用途:</span>
+						</td>
+						<td>
+							<select class="form-control" name="application" title="请选择"
+									th:value="${entity.application}">
+								<option value="">请选择</option>
+								<option th:each="opt:${applicationList}" th:value="${opt.entryValue}"
+										th:text="${opt.entryValue}"
+										th:selected="${entity.application}==${opt.entryValue}"></option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td align="right">
+							<span class="form-label">产品类型:</span>
+						</td>
+						<td colspan="3">
+							<select class="form-control" name="productType" title="请选择" multiple
+									th:value="${entity.productType}">
+								<option th:each="opt:${productTypeList}" th:value="${opt.entryValue}"
+										th:text="${opt.entryValue}"
+										th:selected="${entity.productType}!=null and ${#strings.contains(entity.productType, opt.entryValue)}"></option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td align="right">
+							<span class="form-label">英文定义:</span>
+						</td>
+						<td colspan="3">
+							<textarea class="form-control" name="definitionEn" placeholder="请输入"
+									th:value="${entity.definitionEn}">[[${entity.definitionEn}]]</textarea>
+						</td>
+					</tr>
+					<tr>
+						<td align="right">
+							<span class="form-label">中文定义:</span>
+						</td>
+						<td colspan="3">
+							<textarea class="form-control" name="definitionCn" placeholder="请输入"
+									th:value="${entity.definitionCn}">[[${entity.definitionCn}]]</textarea>
+						</td>
+					</tr>
+					<tr>
+						<td>&nbsp;</td>
+						<td colspan="5">
+							<a href="javascript:void(0);" class="btn btn-primary" id="btnSave">保存</a>
+							<a href="javascript:void(0);" class="btn btn-default border-blue" id="btnBack"
+									style="margin-left:15px;">返回
+							</a>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+			</form>
+		</div>
+	</div>
+</div>
+
+<form th:action="@{/termManage/list}" method="post" id="backForm">
+	<input type="hidden" name="page" th:value="${param.page}"/>
+	<input type="hidden" name="rows" th:value="${param.rows}"/>
+	<input type="hidden" name="nameEn" th:value="${param.nameEn}"/>
+	<input type="hidden" name="nameCn" th:value="${param.nameCn}"/>
+	<input type="hidden" name="status" th:value="${param.status}"/>
+	<input type="hidden" name="productType" th:value="${param.productType}"/>
+	<input type="hidden" name="application" th:value="${param.application}"/>
+	<input type="hidden" name="definitionEn" th:value="${param.definitionEn}"/>
+	<input type="hidden" name="definitionCn" th:value="${param.definitionCn}"/>
+</form>
+<script type="text/javascript" th:src="@{/static/javascript/work/termManage/edit.js}"></script>
+</body>
+</html>

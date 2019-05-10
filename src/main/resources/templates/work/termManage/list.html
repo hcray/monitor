@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head th:include="~{common/commonHead :: commonHead('术语管理')}"></head>
+<body>
+<div th:replace="~{common/titleNav :: titleNavDiv}"></div>
+<div class="content" th:with="oneMenu='1',twoMenu='8'">
+	<div th:replace="~{common/sidebarNav :: sidebarDiv}"></div>
+	<div class="main">
+		<div class="right">
+			<div class="title">
+				<a href="javascript:void(0);" class="btn btn-primary" id="btnExp">导出术语</a>
+				<shiro:hasPermission name="termManage:edit">
+					<a href="javascript:void(0);" class="btn btn-primary" id="btnImp">导入术语</a>
+					<a href="javascript:void(0);" class="btn btn-primary" id="btnAdd">新增术语</a>
+				</shiro:hasPermission>
+			</div>
+			<form id="queryForm" th:action="@{/termManage/list}" method="post">
+				<input type="hidden" name="page" th:value="${entity.page}"/>
+				<input type="hidden" name="rows" th:value="${entity.rows}"/>
+				<input type="hidden" name="id" value=""/>
+				<table class="table table-form">
+					<thead>
+					<tr>
+						<td width="8%"></td>
+						<td width="22%"></td>
+						<td width="8%"></td>
+						<td width="22%"></td>
+						<td width="8%"></td>
+						<td width="22%"></td>
+					</tr>
+					</thead>
+					<tbody>
+					<tr>
+						<td align="right">
+							<span class="form-label">英文名称:</span>
+						</td>
+						<td>
+							<input type="text" class="form-control" name="nameEn" placeholder="请输入"
+									th:value="${entity.nameEn}"/>
+						</td>
+						<td align="right">
+							<span class="form-label">中文名称:</span>
+						</td>
+						<td>
+							<input type="text" class="form-control" name="nameCn" placeholder="请输入"
+									th:value="${entity.nameCn}"/>
+						</td>
+						<td align="right">
+							<span class="form-label">状态:</span>
+						</td>
+						<td>
+							<select class="form-control" name="status" title="请选择" th:value="${entity.status}">
+								<option value="">请选择</option>
+								<option th:each="opt:${statusList}" th:value="${opt.entryValue}"
+										th:text="${opt.entryValue}"
+										th:selected="${entity.status}==${opt.entryValue}"></option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td align="right">
+							<span class="form-label">英文定义:</span>
+						</td>
+						<td>
+							<input type="text" class="form-control" name="definitionEn" placeholder="请输入"
+									th:value="${entity.definitionEn}"/>
+						</td>
+						<td align="right">
+							<span class="form-label">中文定义:</span>
+						</td>
+						<td>
+							<input type="text" class="form-control" name="definitionCn" placeholder="请输入"
+									th:value="${entity.definitionCn}"/>
+						</td>
+						<td align="right">
+							<span class="form-label">用途:</span>
+						</td>
+						<td>
+							<select class="form-control" name="application" title="请选择"
+									th:value="${entity.application}">
+								<option value="">请选择</option>
+								<option th:each="opt:${applicationList}" th:value="${opt.entryValue}"
+										th:text="${opt.entryValue}"
+										th:selected="${entity.application}==${opt.entryValue}"></option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td align="right">
+							<span class="form-label">产品类型:</span>
+						</td>
+						<td>
+							<select class="form-control" name="productType" title="请选择"
+									th:value="${entity.productType}">
+								<option value="">请选择</option>
+								<option th:each="opt:${productTypeList}" th:value="${opt.entryValue}"
+										th:text="${opt.entryValue}"
+										th:selected="${entity.productType}==${opt.entryValue}"></option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>&nbsp;</td>
+						<td colspan="5">
+							<a href="javascript:void(0);" class="btn btn-primary" id="btnQuery">查询</a>
+							<a href="javascript:void(0);" class="btn btn-default border-blue" style="margin-left:15px;"
+									id="btnReset">清空
+							</a>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+			</form>
+			<div style="overflow-x:auto; padding: 0 5px;">
+				<table class="table table-bordered table-striped table-condensed table-hover"
+						style="table-layout: fixed;" name="resizableTable">
+					<thead>
+					<tr>
+						<th width="8%">No.</th>
+						<th width="8%">英文名称</th>
+						<th width="8%">中文名称</th>
+						<th width="8%">状态</th>
+						<th width="10%">产品类型</th>
+						<th width="5%">用途</th>
+						<th width="17%">英文定义</th>
+						<th width="17%">中文定义</th>
+						<th width="13%">更新时间</th>
+						<th width="6%">操作</th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr th:entity-id="${entity.id}" th:each="entity : ${rows}">
+						<td th:title="${entity.itemId}" th:text="${entity.itemId}"></td>
+						<td th:title="${entity.nameEn}" th:text="${entity.nameEn}"></td>
+						<td th:title="${entity.nameCn}" th:text="${entity.nameCn}"></td>
+						<td th:title="${entity.status}" th:text="${entity.status}"></td>
+						<td th:title="${entity.productType}" th:text="${entity.productType}"></td>
+						<td th:title="${entity.application}" th:text="${entity.application}"></td>
+						<td th:title="${entity.definitionEn}" th:text="${entity.definitionEn}"></td>
+						<td th:title="${entity.definitionCn}" th:text="${entity.definitionCn}"></td>
+						<td th:title="${entity.updateTime}" th:text="${entity.updateTime}"></td>
+						<td>
+							<shiro:hasPermission name="termManage:edit">
+								<a class="action" name="termEdit" th:entity-id="${entity.id}" title="编辑">
+									<i class="glyphicon glyphicon-edit"></i>
+								</a>
+							</shiro:hasPermission>
+							<a class="action" name="termHistory" th:entity-id="${entity.id}" title="记录">
+								<i class="glyphicon glyphicon-list"></i>
+							</a>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+			</div>
+			<ul class="pagination" id="pagination"></ul>
+			<div class="page-msg">共
+				<span th:text="${total}"></span>
+				记录
+			</div>
+		</div>
+	</div>
+</div>
+<input type="hidden" id="totalValue" th:value="${total}"/>
+<script type="text/javascript" th:src="@{/static/javascript/work/termManage/list.js}"></script>
+</body>
+
+<div class="modal fade" id="termHistory" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+		aria-hidden="true">
+	<div class="modal-dialog" style="width: 800px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h4 class="modal-title">更改记录</h4>
+			</div>
+			<div class="modal-body">
+				<div class="pop-search-list">
+					<div class="form-group" id="historyDiv" style="height: 550px;">
+						<table class="table table-form">
+							<thead>
+							<tr style="width: 100%; display: table; table-layout: fixed;">
+								<th width="20%">修改项</th>
+								<th width="20%">旧值</th>
+								<th width="20%">新值</th>
+								<th width="18%">修改人员</th>
+								<th width="22%">修改日期</th>
+								<th width="17px">&nbsp;</th>
+							</tr>
+							</thead>
+							<tbody style="display: block; max-height: 500px; overflow-y: scroll;"></tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" id="termImport" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+		aria-hidden="true">
+	<div class="modal-dialog" style="width: 800px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h4 class="modal-title">导入术语</h4>
+			</div>
+			<div class="modal-body">
+				<form id="termImportForm">
+					<div class="pop-search-list" style="">
+						<div class="form-group">
+							<input class="file-loading" type="file" id="dataFile" placeholder="请选择"
+									onchange="onchangeFile()" style="width: 60%; display: inline;">
+							<a th:href="@{/termManage/downloadTemplate}">下载模板</a>
+						</div>
+						<div class="btn-group-box">
+							<button type="button" class="btn btn-primary" id="btnImport">检查</button>
+							<button type="button" class="btn btn-primary" id="btnImportOk"
+									style="display: none;">提交
+							</button>
+							<button type="button" class="btn btn-default border-blue" data-dismiss="modal">取消</button>
+						</div>
+						<div class="form-group" id="termImportTableDiv" style="height: 300px;" hidden>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+</html>

@@ -1,0 +1,53 @@
+@charset "UTF-8";
+/* CSS Document */
+
+body{
+	width:900px;
+	margin:10px auto;
+	font-family:sans-serif;
+	}
+.header{
+	width:836px;
+	height:140px;
+	padding:100px 32px 0;
+	background:url(../images/about_bk.png) no-repeat;
+	}
+.header .title{
+	color:#ffffff;
+	}
+.header .title.L{
+	font-size:48px;
+	margin-bottom:30px;
+	}
+.header .title.M{
+	font-size:18px;
+	margin-bottom:5px;
+	}
+.header .title.S{
+	color:#c2bab4;
+	font-size:12px;
+	}
+.text{
+	padding:42px 30px;
+	border:1px #8e8274 solid;
+	border-top:none;
+	}
+.text table{
+	width:838px;
+	border:none;
+	text-align:left;
+	}
+.text table th{
+	color:#6d4c41;
+	font-size:12px;
+	}
+.text table td span{
+	color:#404040;
+	font-size:14px;
+	line-height:28px;
+	}
+.text table td label{
+	color:#676767;
+	font-size:12px;
+	margin-left:2px;
+	}
